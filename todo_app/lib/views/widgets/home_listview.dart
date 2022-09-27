@@ -35,9 +35,13 @@ class TodoItem extends StatelessWidget {
       ),
       child: Center(
         child: ListTile(
-          leading: Container(
-            height: 2,
-            width: 2,
+          leading: const Text(
+            'Time:\n 3:18',
+            style: TextStyle(
+              color: Colors.black45,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           trailing: Checkbox(
             onChanged: (val) {},
@@ -63,13 +67,13 @@ class TodoItem extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 40,
               ),
               Text(
                 '27/09/2022',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
               ),
