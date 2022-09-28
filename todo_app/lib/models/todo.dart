@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final todo = todoFromJson(jsonString);
-
 import 'dart:convert';
 
 class Todo {
@@ -30,4 +26,17 @@ class Todo {
         "isDone": isDone,
         "id": id,
       };
+
+  Todo copyWith({
+    DateTime? createdAt,
+    String? task,
+    bool? isDone,
+    String? id,
+  }) =>
+      Todo(
+        createdAt: createdAt ?? this.createdAt,
+        task: task ?? this.task,
+        isDone: isDone ?? this.isDone,
+        id: id ?? this.id,
+      );
 }

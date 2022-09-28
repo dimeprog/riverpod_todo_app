@@ -4,6 +4,7 @@ class ColorManager {
   static Color deepPrimary = HexColor.fromHex('#ffc300');
   static Color slowPrimary = HexColor.fromHex('#ffd60a');
   static Color iconColor = HexColor.fromHex('#000814');
+  static Color lightYellow = Colors.amber.shade200;
 }
 
 extension HexColor on Color {

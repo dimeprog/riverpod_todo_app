@@ -12,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(todoProvider);
     return Scaffold(
-      backgroundColor: ColorManager.slowPrimary,
+      backgroundColor: ColorManager.lightYellow,
       appBar: AppBar(
         backgroundColor: ColorManager.deepPrimary,
         elevation: 0,

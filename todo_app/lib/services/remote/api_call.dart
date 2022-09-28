@@ -27,10 +27,36 @@ class ApiCall {
   }
 
   // post request
-  Future<dynamic> postData(String path, dynamic load) async {
+  Future<dynamic> postData(
+    String path,
+    dynamic load,
+  ) async {
     final url = Uri.parse(baseUrl + path);
     try {
       final response = await http.post(
+        url,
+        body: jsonEncode(load),
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data;
+      } else {
+        Get.snackbar('Error', ' unable to load data',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.white,
+            colorText: Colors.black);
+      }
+    } catch (err) {
+      Get.snackbar('Error', err.toString());
+    }
+  }
+
+  // put request
+  Future<dynamic> putData(String path, dynamic load) async {
+    // final reqLoad = {'id': load};
+    final url = Uri.parse(baseUrl + path);
+    try {
+      final response = await http.put(
         url,
         body: jsonEncode(load),
       );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:todo_app/views/widgets/color_manager.dart';
-
 import '../../models/todo.dart';
 import 'package:intl/intl.dart';
 
@@ -23,13 +21,19 @@ class HomeListView extends StatelessWidget {
   }
 }
 
-class TodoItem extends StatelessWidget {
+class TodoItem extends StatefulWidget {
   final Todo todo;
   const TodoItem({
     Key? key,
     required this.todo,
   }) : super(key: key);
 
+  @override
+  State<TodoItem> createState() => _TodoItemState();
+}
+
+class _TodoItemState extends State<TodoItem> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,7 +50,7 @@ class TodoItem extends StatelessWidget {
       child: Center(
         child: ListTile(
           leading: Text(
-            DateFormat('kk:mm a').format(todo.createdAt!),
+            DateFormat('kk:mm a').format(widget.todo.createdAt!),
             style: const TextStyle(
               color: Colors.black45,
               fontSize: 16,
@@ -54,15 +58,19 @@ class TodoItem extends StatelessWidget {
             ),
           ),
           trailing: Checkbox(
-            onChanged: (val) {},
-            value: todo.isDone ?? false,
+            onChanged: (val) {
+              setState(() {
+                isChecked = val!;
+              });
+            },
+            value: isChecked,
             checkColor: Colors.white,
           ),
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                todo.task!,
+                widget.todo.task!,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -73,7 +81,7 @@ class TodoItem extends StatelessWidget {
                 height: 40,
               ),
               Text(
-                DateFormat('dd/mm/yyyy').format(todo.createdAt!),
+                DateFormat('dd/mm/yyyy').format(widget.todo.createdAt!),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
