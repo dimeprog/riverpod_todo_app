@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:todo_app/views/widgets/color_manager.dart';
 
+import '../../models/todo.dart';
+import 'package:intl/intl.dart';
+
 class HomeListView extends StatelessWidget {
-  const HomeListView({super.key});
+  final List<Todo> todoList;
+  const HomeListView({
+    super.key,
+    required this.todoList,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => TodoItem(),
-      itemCount: 100,
+      itemBuilder: (context, index) => TodoItem(
+        todo: todoList[index],
+      ),
+      itemCount: todoList.length,
     );
   }
 }
 
 class TodoItem extends StatelessWidget {
+  final Todo todo;
   const TodoItem({
     Key? key,
+    required this.todo,
   }) : super(key: key);
 
   @override
@@ -35,9 +45,9 @@ class TodoItem extends StatelessWidget {
       ),
       child: Center(
         child: ListTile(
-          leading: const Text(
-            'Time:\n 3:18',
-            style: TextStyle(
+          leading: Text(
+            DateFormat('kk:mm a').format(todo.createdAt!),
+            style: const TextStyle(
               color: Colors.black45,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -45,33 +55,26 @@ class TodoItem extends StatelessWidget {
           ),
           trailing: Checkbox(
             onChanged: (val) {},
-            value: true,
+            value: todo.isDone ?? false,
             checkColor: Colors.white,
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return Colors.black.withOpacity(.32);
-              }
-              return Colors.white;
-            }),
           ),
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
-                'cooking on thursday',
-                style: TextStyle(
+                todo.task!,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Text(
-                '27/09/2022',
-                style: TextStyle(
+                DateFormat('dd/mm/yyyy').format(todo.createdAt!),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,

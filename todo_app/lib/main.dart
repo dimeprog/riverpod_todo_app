@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/views/screens/home.dart';
 import 'package:todo_app/views/widgets/color_manager.dart';
 import 'package:todo_app/views/widgets/theme.dart';
@@ -13,11 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'To-do App',
-      debugShowCheckedModeBanner: false,
-      theme: getApplicationData(),
-      home: const HomeScreen(),
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'To-do App',
+        debugShowCheckedModeBanner: false,
+        theme: getApplicationData(),
+        home: const HomeScreen(),
+      ),
     );
   }
 }
