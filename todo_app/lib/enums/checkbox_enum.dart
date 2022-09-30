@@ -1,0 +1,4 @@
+enum CheckStatus {
+  Active,
+  Inactive,
+}

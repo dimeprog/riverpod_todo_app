@@ -75,47 +75,48 @@ class _AddTasksButtonState extends ConsumerState<AddTasksButton> {
       backgroundColor: Colors.teal,
       onPressed: () {
         showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  title: Center(child: Text('Add New Tasks')),
-                  content: Container(
-                    height: 200,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          TextField(
-                            controller: _controller,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: const BorderSide(
-                                  color: Colors.lightBlue,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
+          context: context,
+          builder: (context) => AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            title: Center(child: Text('Add New Tasks')),
+            content: Container(
+              height: 200,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Center(
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.lightBlue,
+                            width: 1,
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Add',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ));
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Add',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
       },
       child: const Icon(
         Icons.add,

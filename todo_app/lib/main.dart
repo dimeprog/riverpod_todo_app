@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:todo_app/views/screens/home.dart';
 import 'package:todo_app/views/widgets/color_manager.dart';
 import 'package:todo_app/views/widgets/theme.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
+      child: GetMaterialApp(
         title: 'To-do App',
         debugShowCheckedModeBanner: false,
         theme: getApplicationData(),

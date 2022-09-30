@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/providers/repos/toggle_todo_repo.dart';
 import 'package:todo_app/views/widgets/color_manager.dart';
 import '../../models/todo.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +23,7 @@ class HomeListView extends StatelessWidget {
   }
 }
 
-class TodoItem extends StatefulWidget {
+class TodoItem extends ConsumerStatefulWidget {
   final Todo todo;
   const TodoItem({
     Key? key,
@@ -29,13 +31,20 @@ class TodoItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<TodoItem> createState() => _TodoItemState();
+  ConsumerState<TodoItem> createState() => _TodoItemState();
 }
 
-class _TodoItemState extends State<TodoItem> {
-  bool isChecked = false;
+class _TodoItemState extends ConsumerState<TodoItem> {
+  @override
+  void initState() {
+    ref.read(toggleRepositoryProvider);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isChecked = widget.todo.isDone!;
+    final toggle = ref.watch(toggleRepositoryProvider.notifier);
     return Container(
       height: 200,
       margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 16),
@@ -58,10 +67,11 @@ class _TodoItemState extends State<TodoItem> {
             ),
           ),
           trailing: Checkbox(
-            onChanged: (val) {
+            onChanged: (val) async {
               setState(() {
                 isChecked = val!;
               });
+              await toggle.postToggleValue(widget.todo.id!, isDone: isChecked);
             },
             value: isChecked,
             checkColor: Colors.white,
